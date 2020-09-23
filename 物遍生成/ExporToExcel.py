@@ -160,20 +160,20 @@ def writeDoo(file1, wb):
                         longDataStr += str3
                         longDataColumnI = i+offsetColunm
                     else:
-                        sheet.cell(row=rowI, column=i +
-                                   offsetColunm).value = str3
+                        sheet.cell(row=rowI, column=i+offsetColunm).value = str3
             elif UbertipStrBoolean:
                 UbertipStr += str
-            elif longDataColumnI != 0:
-                longDataStr += str
+            
             elif len(str)>0 and str[-1] == "}":
                 if not longDataColumnI == 0:
-                    sheet.cell(
-                        row=rowI, column=longDataColumnI).value = longDataStr
+                    longDataStr += "}"
+                    sheet.cell(row=rowI, column=longDataColumnI).value = longDataStr
                     longDataColumnI = 0
                     longDataStr = ""
                 else:
                     assert False
+            elif longDataColumnI != 0:
+                longDataStr += str
 
 
 wb = openpyxl.load_workbook('demo2.xlsm', keep_vba=True)

@@ -1,4 +1,4 @@
-﻿[CustomSkin]
+[CustomSkin]
 ChatFont=fonts.ttf
 CommandButtonCooldown=war3mapImported\ui-cooldown-indicator.mdx
 EscMenuBackground=UI\Widgets\EscMenu\Human\quest-normal-background.blp

@@ -1,0 +1,326 @@
+﻿
+IncludeFile "UI\FrameDef\Glue\BattleNetTemplates.fdf",
+
+
+//透明按钮
+Frame "BUTTON" "UI_Empty_Btn" {
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ControlBackdrop "UI_Skill_1",
+    Frame "BACKDROP" "UI_Skill_1" {
+        BackdropBackground  "war3mapImported\alpha.tga",
+        BackdropBlendAll,
+    }
+    //高亮
+    ControlMouseOverHighlight "UI_Skill_2",
+    Frame "HIGHLIGHT" "UI_Skill_2" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\quest-button-highlight.blp",
+        HighlightAlphaMode "ADD",
+    }
+}
+//图片
+Frame "BACKDROP" "UI_BACKDROP" {
+    BackdropTileBackground,
+}
+
+
+//顶部菜单
+Frame "BACKDROP" "UI_Top_Frame" {
+    BackdropTileBackground,
+    BackdropBackground  "UI\Widgets\EscMenu\Human\quest-normal-background.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.008,
+    BackdropBackgroundSize  0.016,
+    BackdropBackgroundInsets 0.002 0.002 0.002 0.002,
+    BackdropEdgeFile  "UI\Widgets\BattleNet\bnet-tooltip-border.blp",
+    BackdropBlendAll,
+}
+
+Frame "BACKDROP" "UI_DAMAGE_BAR_1" {
+    BackdropTileBackground,
+    BackdropBackground  "war3mapImported\ui_bar_red.tga",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.008,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.001 0.001 0.001 0.001,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\human\human-options-menu-border.blp",
+}
+
+Frame "BACKDROP" "UI_DAMAGE_BAR_2" {
+    BackdropTileBackground,
+    BackdropBackground  "war3mapImported\ui_bar_blue.tga",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.008,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.001 0.001 0.001 0.001,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\human\human-options-menu-border.blp",
+}
+
+Frame "BACKDROP" "UI_DAMAGE_BAR_3" {
+    BackdropTileBackground,
+    BackdropBackground  "war3mapImported\ui_bar_cyan.tga",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.008,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.001 0.001 0.001 0.001,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\human\human-options-menu-border.blp",
+}
+
+Frame "BACKDROP" "UI_DAMAGE_BAR_4" {
+    BackdropTileBackground,
+    BackdropBackground  "war3mapImported\ui_bar_purple.tga",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.008,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.001 0.001 0.001 0.001,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\human\human-options-menu-border.blp",
+}
+
+Frame "BACKDROP" "UI_DAMAGE_BAR_5" {
+    BackdropTileBackground,
+    BackdropBackground  "war3mapImported\ui_bar_yellow.tga",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.008,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.001 0.001 0.001 0.001,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\human\human-options-menu-border.blp",
+}
+
+Frame "BACKDROP" "UI_DAMAGE_BAR_6" {
+    BackdropTileBackground,
+    BackdropBackground  "war3mapImported\ui_bar_orange.tga",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.008,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.001 0.001 0.001 0.001,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\human\human-options-menu-border.blp",
+}
+
+
+Frame "BACKDROP" "UI_Dialog_NE" {
+    BackdropTileBackground,
+    BackdropBackground  "UI\Widgets\EscMenu\NightElf\nightelf-options-menu-background.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.032,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.01 0.01 0.01 0.01,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\NightElf\nightelf-options-menu-border.blp",
+}
+
+
+
+Frame "BACKDROP" "UI_FRANME_REWARD" {
+    BackdropTileBackground,
+    BackdropBackground  "Textures\Black32.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.016,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.004 0.004 0.004 0.004,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\human\human-options-menu-border.blp",
+}
+
+Frame "BACKDROP" "UI_FRANME_HUMAN" {
+    BackdropTileBackground,
+    BackdropBackground  "UI\Widgets\EscMenu\Human\quest-normal-background.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.008,
+    BackdropBackgroundSize  0.016,
+    BackdropBackgroundInsets 0.002 0.002 0.002 0.002,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\human\human-options-menu-border.blp",
+    BackdropBlendAll,
+}
+
+Frame "BACKDROP" "UI_FRANME_ORC" {
+    BackdropTileBackground,
+    BackdropBackground  "UI\Widgets\EscMenu\NightElf\nightelf-options-menu-background.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.016,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.004 0.004 0.004 0.004,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\orc\orc-options-menu-border.blp",
+}
+
+Frame "BACKDROP" "UI_FRANME_NIGHT" {
+    BackdropTileBackground,
+    BackdropBackground  "UI\Widgets\EscMenu\NightElf\nightelf-options-menu-background.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.032,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.008 0.008 0.008 0.008,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\NightElf\nightelf-options-menu-border.blp",
+    BackdropBlendAll,
+}
+
+Frame "BACKDROP" "UI_FRANME_NIGHT2" {
+    BackdropTileBackground,
+    BackdropBackground  "UI\Widgets\EscMenu\NightElf\nightelf-options-menu-background.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.032,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.008 0.008 0.008 0.008,
+    BackdropEdgeFile  "war3mapImported\nightelf-options-menu-border.blp",
+    BackdropBlendAll,
+}
+
+Frame "BACKDROP" "UI_FRANME_UNDEAD" {
+    BackdropTileBackground,
+    BackdropBackground  "UI\Widgets\EscMenu\NightElf\nightelf-options-menu-background.blp",
+    BackdropCornerSize  0.016,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.004 0.004 0.004 0.004,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\undead\undead-options-menu-border.blp",
+}
+
+Frame "BACKDROP" "UI_FRANME_REWARD_BLACK" {
+    BackdropTileBackground,
+    BackdropBackground  "Textures\Black32.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.016,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.004 0.004 0.004 0.004,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\Human\human-options-menu-border.blp",
+}
+
+
+
+
+Frame "BACKDROP" "UI_Dialog_UD" {
+    BackdropTileBackground,
+    BackdropBackground  "UI\Widgets\EscMenu\NightElf\nightelf-options-menu-background.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.016,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.004 0.004 0.004 0.004,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\Undead\undead-options-menu-border.blp",
+}
+
+Frame "BACKDROP" "tiptools" {
+    BackdropTileBackground,
+    BackdropBackground  "UI\Widgets\EscMenu\Human\human-options-menu-background.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.016,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.004 0.004 0.004 0.004,
+    BackdropEdgeFile  "UI\Widgets\EscMenu\Human\human-options-menu-border.blp",
+}
+
+
+Frame "TEXT" "NormalText" {
+    FrameFont "fonts.ttf", 0.012, "",
+    FontFlags "FIXEDSIZE",
+    FontColor 1.0 1.0 1.0 1.0,
+    FontHighlightColor 1.0 1.0 1.0 1.0,
+    FontDisabledColor 1.0 1.0 1.0 1.0,
+    FontShadowColor 0.0 0.0 0.0 0.9,
+    FontShadowOffset 0.0012 -0.0012,
+    LayerStyle "IGNORETRACKEVENTS",
+}
+Frame "TEXT" "text006" {
+    FrameFont "war3mapImported\text.ttf", 0.006, "",
+    FontJustificationH JUSTIFYRIGHT,
+    FontJustificationV JUSTIFYMIDDLE,
+    FontFlags "FIXEDSIZE",
+    FontColor 1.0 1.0 1.0 1.0,
+    FontHighlightColor 1.0 1.0 1.0 1.0,
+    FontDisabledColor 1.0 1.0 1.0 1.0,
+    FontShadowColor 0.0 0.0 0.0 0.9,
+    FontShadowOffset 0.0012 -0.0012,
+    LayerStyle "IGNORETRACKEVENTS",
+}
+Frame "TEXT" "text007" {
+    FrameFont "war3mapImported\text.ttf", 0.007, "",
+    FontJustificationH JUSTIFYRIGHT,
+    FontJustificationV JUSTIFYMIDDLE,
+    FontFlags "FIXEDSIZE",
+    FontColor 1.0 1.0 1.0 1.0,
+    FontHighlightColor 1.0 1.0 1.0 1.0,
+    FontDisabledColor 1.0 1.0 1.0 1.0,
+    FontShadowColor 0.0 0.0 0.0 0.9,
+    FontShadowOffset 0.0012 -0.0012,
+    LayerStyle "IGNORETRACKEVENTS",
+}
+Frame "TEXT" "text008" {
+    FrameFont "fonts.ttf", 0.008, "",
+    FontJustificationH JUSTIFYCENTER,
+    FontJustificationV JUSTIFYMIDDLE,
+    FontFlags "FIXEDSIZE",
+    FontColor 1.0 1.0 1.0 1.0,
+    FontHighlightColor 1.0 1.0 1.0 1.0,
+    FontDisabledColor 1.0 1.0 1.0 1.0,
+    FontShadowColor 0.0 0.0 0.0 0.9,
+    FontShadowOffset 0.0012 -0.0012,
+    LayerStyle "IGNORETRACKEVENTS",
+}
+Frame "TEXT" "text009" {
+    FrameFont "fonts.ttf", 0.009, "",
+    FontJustificationH JUSTIFYLEFT,
+    FontJustificationV JUSTIFYMIDDLE,
+    FontFlags "FIXEDSIZE",
+    FontColor 1.0 1.0 1.0 1.0,
+    FontHighlightColor 1.0 1.0 1.0 1.0,
+    FontDisabledColor 1.0 1.0 1.0 1.0,
+    FontShadowColor 0.0 0.0 0.0 0.9,
+    FontShadowOffset 0.0012 -0.0012,
+    LayerStyle "IGNORETRACKEVENTS",
+}
+Frame "TEXT" "text010" {
+    FrameFont "fonts.ttf", 0.010, "",
+    FontJustificationH JUSTIFYRIGHT,
+    FontJustificationV JUSTIFYMIDDLE,
+    FontFlags "FIXEDSIZE",
+    FontColor 1.0 1.0 1.0 1.0,
+    FontHighlightColor 1.0 1.0 1.0 1.0,
+    FontDisabledColor 1.0 1.0 1.0 1.0,
+    FontShadowColor 0.0 0.0 0.0 0.9,
+    FontShadowOffset 0.0012 -0.0012,
+    LayerStyle "IGNORETRACKEVENTS",
+}
+Frame "TEXT" "text011" {
+    FrameFont "fonts\dfst-m3u.ttf", 0.011, "",
+    FontJustificationH JUSTIFYRIGHT,
+    FontJustificationV JUSTIFYMIDDLE,
+    FontFlags "FIXEDSIZE",
+    FontColor 1.0 1.0 1.0 1.0,
+    FontHighlightColor 1.0 1.0 1.0 1.0,
+    FontDisabledColor 1.0 1.0 1.0 1.0,
+    FontShadowColor 0.0 0.0 0.0 0.9,
+    FontShadowOffset 0.0012 -0.0012,
+    LayerStyle "IGNORETRACKEVENTS",
+}
+Frame "TEXT" "text012" {
+    FrameFont "fonts.ttf", 0.012, "",
+    FontJustificationH JUSTIFYLEFT,
+    FontJustificationV JUSTIFYMIDDLE,
+    FontFlags "FIXEDSIZE",
+    FontColor 1.0 1.0 1.0 1.0,
+    FontHighlightColor 1.0 1.0 1.0 1.0,
+    FontDisabledColor 1.0 1.0 1.0 1.0,
+    FontShadowColor 0.0 0.0 0.0 0.9,
+    FontShadowOffset 0.0012 -0.0012,
+    LayerStyle "IGNORETRACKEVENTS",
+}
+
+
+//高亮按钮
+Frame "BUTTON" "ButtonTemplateBTN" {
+	ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+
+	ControlMouseOverHighlight "ButtonMouseOverHighlightTemplate",
+	Frame "HIGHLIGHT" "ButtonMouseOverHighlightTemplate" {
+		HighlightType "FILETEXTURE",
+		HighlightAlphaFile "war3mapImported\mall_bag_button_light_small.blp",
+		HighlightAlphaMode "ADD",
+	}
+}
+
+Frame "TEXTBUTTON" "ButtonTemplateBTN2" {
+	ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+
+	ControlMouseOverHighlight "ButtonMouseOverHighlightTemplate",
+	Frame "HIGHLIGHT" "ButtonMouseOverHighlightTemplate" {
+		HighlightType "FILETEXTURE",
+		HighlightAlphaFile "war3mapImported\mall_bag_button_light.blp",
+		HighlightAlphaMode "ADD",
+		HighlightColor 1 1 1 0.1,
+	}
+}
