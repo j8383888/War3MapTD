@@ -176,7 +176,7 @@ def writeDoo(file1, wb):
                 longDataStr += str
 
 
-wb = openpyxl.load_workbook('demo2.xlsm', keep_vba=True)
+wb = openpyxl.load_workbook('物遍.xlsm', keep_vba=True)
 
 file1 = r"unitOrigin.ini"
 if(os.path.exists(file1)):
@@ -203,7 +203,7 @@ if(os.path.exists(file1)):
     print("=========科技数据导出完毕========")
 
 print("=========正在保存========")
-wb.save('demo2.xlsm')  # 保存文件，注意以xlsx为文件扩展名
+wb.save('物遍.xlsm')  # 保存文件，注意以xlsx为文件扩展名
 print("=========保存完毕！========")
 
 # writeXlsx()
