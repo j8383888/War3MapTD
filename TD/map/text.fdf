@@ -21,6 +21,7 @@ Frame "BUTTON" "UI_Empty_Btn" {
 //图片
 Frame "BACKDROP" "UI_BACKDROP" {
     BackdropTileBackground,
+    BackdropBlendAll,
 }
 
 
