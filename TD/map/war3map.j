@@ -65,14 +65,14 @@ constant boolean LIBRARY_YDWEMultiboardSetItemWidthBJNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger= null
-trigger array YDWETriggerEvent__DamageEventQueue
-integer YDWETriggerEvent__DamageEventNumber= 0
+trigger array YDWETriggerEvent___DamageEventQueue
+integer YDWETriggerEvent___DamageEventNumber= 0
 	
 item bj_lastMovedItemInItemSlot= null
 	
-trigger YDWETriggerEvent__MoveItemEventTrigger= null
-trigger array YDWETriggerEvent__MoveItemEventQueue
-integer YDWETriggerEvent__MoveItemEventNumber= 0
+trigger YDWETriggerEvent___MoveItemEventTrigger= null
+trigger array YDWETriggerEvent___MoveItemEventQueue
+integer YDWETriggerEvent___MoveItemEventNumber= 0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -505,7 +505,7 @@ endglobals
 
 //library BzAPI ends
 //library YDTriggerSaveLoadSystem:
-    function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+    function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
             set YDHT=InitHashtable()
         set YDLOC=InitHashtable()
     endfunction
@@ -1440,9 +1440,9 @@ function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
     local integer i= 0
     
     loop
-        exitwhen i >= YDWETriggerEvent__DamageEventNumber
-        if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
-            call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
+        exitwhen i >= YDWETriggerEvent___DamageEventNumber
+        if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
+            call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
         endif
         set i=i + 1
     endloop
@@ -1471,14 +1471,14 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
         return
     endif
         
-    if YDWETriggerEvent__DamageEventNumber == 0 then
+    if YDWETriggerEvent___DamageEventNumber == 0 then
         set yd_DamageEventTrigger=CreateTrigger()
         call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
         call YDWEAnyUnitDamagedEnumUnit()
     endif
     
-    set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
-    set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
+    set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
+    set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
 endfunction
 //===========================================================================  
 //移动物品事件 
@@ -1489,9 +1489,9 @@ function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
     if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 		set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
     	loop
-        	exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
-        	if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
-        	    call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
+        	exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
+        	if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
+        	    call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
         	endif
         	set i=i + 1
     	endloop
@@ -1502,14 +1502,14 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
         return
     endif
         
-    if YDWETriggerEvent__MoveItemEventNumber == 0 then
-        set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
-        call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-        call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+    if YDWETriggerEvent___MoveItemEventNumber == 0 then
+        set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
+        call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+        call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
     endif
     
-    set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
-    set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
+    set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
+    set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
     return bj_lastMovedItemInItemSlot
@@ -1754,7 +1754,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Tue Oct 06 12:45:16 2020
+//   Date: Tue Oct 06 13:07:26 2020
 //   Map Author: 鏈煡
 // 
 //===========================================================================
@@ -3268,18 +3268,14 @@ function Trig_SelectCardFunc008T takes nothing returns nothing
         loop
             exitwhen ydul_i > 3
             if ( ( ydul_i == LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0xA707D18B) ) ) then
-                call DzFrameSetTexture(udg_CardSelectFrame[ydul_i], ( ( "war3mapImported\\buy_eff_" ) + ( I2S(( LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820) + 6 )) ) + ( ".blp" ) ), 0)
+                call DzFrameSetTexture(udg_CardSelectFrame[ydul_i], ( ( "war3mapImported\\buy_eff_" ) + ( I2S(LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820)) ) + ( ".blp" ) ), 0)
             else
-                if ( ( LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820) <= 6 ) ) then
-                    call DzFrameSetTexture(udg_CardSelectFrame[ydul_i], ( ( "war3mapImported\\xiaoshi_eff_" ) + ( I2S(LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820)) ) + ( ".blp" ) ), 0)
+                call DzFrameSetTexture(udg_CardSelectFrame[ydul_i], ( ( "war3mapImported\\xiaoshi_eff_" ) + ( I2S(LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820)) ) + ( ".blp" ) ), 0)
+                if ( ( LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820) == 7 ) ) then
+                    call DzFrameShow(udg_CardCircleEff[ydul_i], false)
+                    call DzFrameShow(udg_CardFrontEff[ydul_i], false)
+                    call DzFrameShow(udg_CardBtn[ydul_i], false)
                 else
-                    if ( ( LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820) == 7 ) ) then
-                        call DzFrameShow(udg_CardSelectFrame[ydul_i], false)
-                        call DzFrameShow(udg_CardCircleEff[ydul_i], false)
-                        call DzFrameShow(udg_CardFrontEff[ydul_i], false)
-                        call DzFrameShow(udg_CardBtn[ydul_i], false)
-                    else
-                    endif
                 endif
             endif
             set ydul_i=ydul_i + 1
@@ -3288,7 +3284,12 @@ function Trig_SelectCardFunc008T takes nothing returns nothing
     endif
     if ( ( LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820) == 17 ) ) then
         if ( ( LoadPlayerHandle(YDLOC, GetHandleId(GetExpiredTimer()), 0xA59BB4C6) == GetLocalPlayer() ) ) then
-            call DzFrameShow(udg_CardSelectFrame[LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0xA707D18B)], false)
+            set ydul_i=0
+            loop
+                exitwhen ydul_i > 3
+                call DzFrameShow(udg_CardSelectFrame[ydul_i], false)
+                set ydul_i=ydul_i + 1
+            endloop
             call DzFrameShow(udg_CardCircleEff[LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0xA707D18B)], false)
             call DzFrameShow(udg_CardFrontEff[LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0xA707D18B)], false)
             call DzFrameShow(udg_CardBtn[LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0xA707D18B)], false)
@@ -4087,8 +4088,23 @@ endfunction
 function Trig_UIInitFunc016Func004003 takes nothing returns nothing
     call DzSyncData("SelectCard", LoadStr(YDHT, ((DzGetTriggerUIEventFrame())), 0xB9B8D73D)) // INLINED!!
 endfunction
+function Trig_UIInitFunc017T takes nothing returns nothing
+    local integer ydul_i
+    call SaveInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820, ( LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820) + 1 ))
+    set ydul_i=0
+    loop
+        exitwhen ydul_i > 3
+        call DzFrameSetTexture(udg_CardSelectFrame[ydul_i], ( ( "war3mapImported\\xiaoshi_eff_" ) + ( I2S(LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820)) ) + ( ".blp" ) ), 0)
+        set ydul_i=ydul_i + 1
+    endloop
+    if ( ( LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820) == 17 ) ) then
+        call SaveInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820, 1)
+    else
+    endif
+endfunction
 function Trig_UIInitActions takes nothing returns nothing
     local integer ydul_i
+    local timer ydl_timer
     local integer ydl_localvar_step= LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
  set ydl_localvar_step=ydl_localvar_step + 3
  call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
@@ -4132,13 +4148,16 @@ function Trig_UIInitActions takes nothing returns nothing
         call DzFrameShow(udg_CardCircleEff[ydul_i], false)
         // 閫変腑鐗规晥UI
         call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", DzGetGameUI(), "UI_BACKDROP", 0))
-        call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 4, DzFrameGetCommandBarButton(0, ydul_i), 4, - 0.0008, LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08C9F4BA))
-        call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0.055, 0.058)
+        call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0.06, 0.068)
+        call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 4, DzFrameGetCommandBarButton(0, ydul_i), 4, - 0.0008, ( ( LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08C9F4BA) ) + ( 0.003 ) ))
         set udg_CardSelectFrame[ydul_i]=LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490)
-        call DzFrameShow(udg_CardSelectFrame[ydul_i], false)
         set ydul_i=ydul_i + 1
     endloop
+    set ydl_timer=CreateTimer()
+    call SaveInteger(YDLOC, GetHandleId(ydl_timer), 0x25DAB820, 0)
+    call TimerStart(ydl_timer, 0.03, true, function Trig_UIInitFunc017T)
     call FlushChildHashtable(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+    set ydl_timer=null
 endfunction
 //===========================================================================
 function InitTrig_UIInit takes nothing returns nothing
@@ -4663,7 +4682,7 @@ function main takes nothing returns nothing
     call CreateAllUnits()
     call InitBlizzard()
 
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("YDWETimerSystem__Init")
 
