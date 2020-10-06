@@ -32,6 +32,12 @@ Frame "BUTTON" "UI_Hero_Btn0" {
         BackdropBackground  "blank.blp",
         BackdropBlendAll,
     }
+    ControlMouseOverHighlight "UI_Hero_Btn0_4",
+    Frame "HIGHLIGHT" "UI_Hero_Btn0_4" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\quest-button-highlight.blp",
+        HighlightAlphaMode "ADD",
+    }
 }
 
 //英雄按钮1
@@ -41,6 +47,12 @@ Frame "BUTTON" "UI_Hero_Btn1" {
     Frame "BACKDROP" "UI_Hero_Btn1_1" {
         BackdropBackground  "blank.blp",
         BackdropBlendAll,
+    }
+    ControlMouseOverHighlight "UI_Hero_Btn1_4",
+    Frame "HIGHLIGHT" "UI_Hero_Btn1_4" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\quest-button-highlight.blp",
+        HighlightAlphaMode "ADD",
     }
 }
 
@@ -52,6 +64,12 @@ Frame "BUTTON" "UI_Hero_Btn2" {
         BackdropBackground  "blank.blp",
         BackdropBlendAll,
     }
+    ControlMouseOverHighlight "UI_Hero_Btn2_4",
+    Frame "HIGHLIGHT" "UI_Hero_Btn2_4" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\quest-button-highlight.blp",
+        HighlightAlphaMode "ADD",
+    }
 }
 
 //英雄按钮3
@@ -61,6 +79,12 @@ Frame "BUTTON" "UI_Hero_Btn3" {
     Frame "BACKDROP" "UI_Hero_Btn3_1" {
         BackdropBackground  "blank.blp",
         BackdropBlendAll,
+    }
+    ControlMouseOverHighlight "UI_Hero_Btn3_4",
+    Frame "HIGHLIGHT" "UI_Hero_Btn3_4" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\quest-button-highlight.blp",
+        HighlightAlphaMode "ADD",
     }
 }
 
