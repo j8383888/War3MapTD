@@ -32,13 +32,13 @@ integer YDWEBase__AbilityCastingOverEventNumber= 0
 //endglobals from YDWEBase
 //globals from YDWEEventDamageData:
 constant boolean LIBRARY_YDWEEventDamageData=true
-constant integer YDWEEventDamageData___EVENT_DAMAGE_DATA_VAILD= 0
-constant integer YDWEEventDamageData___EVENT_DAMAGE_DATA_IS_PHYSICAL= 1
-constant integer YDWEEventDamageData___EVENT_DAMAGE_DATA_IS_ATTACK= 2
-constant integer YDWEEventDamageData___EVENT_DAMAGE_DATA_IS_RANGED= 3
-constant integer YDWEEventDamageData___EVENT_DAMAGE_DATA_DAMAGE_TYPE= 4
-constant integer YDWEEventDamageData___EVENT_DAMAGE_DATA_WEAPON_TYPE= 5
-constant integer YDWEEventDamageData___EVENT_DAMAGE_DATA_ATTACK_TYPE= 6
+constant integer YDWEEventDamageData__EVENT_DAMAGE_DATA_VAILD= 0
+constant integer YDWEEventDamageData__EVENT_DAMAGE_DATA_IS_PHYSICAL= 1
+constant integer YDWEEventDamageData__EVENT_DAMAGE_DATA_IS_ATTACK= 2
+constant integer YDWEEventDamageData__EVENT_DAMAGE_DATA_IS_RANGED= 3
+constant integer YDWEEventDamageData__EVENT_DAMAGE_DATA_DAMAGE_TYPE= 4
+constant integer YDWEEventDamageData__EVENT_DAMAGE_DATA_WEAPON_TYPE= 5
+constant integer YDWEEventDamageData__EVENT_DAMAGE_DATA_ATTACK_TYPE= 6
 //endglobals from YDWEEventDamageData
 //globals from YDWEGetUnitsInRangeOfLocMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRangeOfLocMatchingNull=true
@@ -65,14 +65,14 @@ constant boolean LIBRARY_YDWEMultiboardSetItemWidthBJNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger= null
-trigger array YDWETriggerEvent__DamageEventQueue
-integer YDWETriggerEvent__DamageEventNumber= 0
+trigger array YDWETriggerEvent___DamageEventQueue
+integer YDWETriggerEvent___DamageEventNumber= 0
 	
 item bj_lastMovedItemInItemSlot= null
 	
-trigger YDWETriggerEvent__MoveItemEventTrigger= null
-trigger array YDWETriggerEvent__MoveItemEventQueue
-integer YDWETriggerEvent__MoveItemEventNumber= 0
+trigger YDWETriggerEvent___MoveItemEventTrigger= null
+trigger array YDWETriggerEvent___MoveItemEventQueue
+integer YDWETriggerEvent___MoveItemEventNumber= 0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -135,6 +135,7 @@ boolean udg_effOpen= false
 integer array udg_CardCircleEff
 integer array udg_CardSelectFrame
 integer array udg_CardBtn
+integer udg_ZhaoMuPanel= 0
     // Generated
 rect gg_rct_rect1_1= null
 rect gg_rct_rect1_2= null
@@ -1236,25 +1237,25 @@ endfunction
 
 	
  function YDWEIsEventPhysicalDamage takes nothing returns boolean
-		return 0 != EXGetEventDamageData(YDWEEventDamageData___EVENT_DAMAGE_DATA_IS_PHYSICAL)
+		return 0 != EXGetEventDamageData(YDWEEventDamageData__EVENT_DAMAGE_DATA_IS_PHYSICAL)
 	endfunction
  function YDWEIsEventAttackDamage takes nothing returns boolean
-		return 0 != EXGetEventDamageData(YDWEEventDamageData___EVENT_DAMAGE_DATA_IS_ATTACK)
+		return 0 != EXGetEventDamageData(YDWEEventDamageData__EVENT_DAMAGE_DATA_IS_ATTACK)
 	endfunction
 	
  function YDWEIsEventRangedDamage takes nothing returns boolean
-		return 0 != EXGetEventDamageData(YDWEEventDamageData___EVENT_DAMAGE_DATA_IS_RANGED)
+		return 0 != EXGetEventDamageData(YDWEEventDamageData__EVENT_DAMAGE_DATA_IS_RANGED)
 	endfunction
 	
  function YDWEIsEventDamageType takes damagetype damageType returns boolean
-		return damageType == ConvertDamageType(EXGetEventDamageData(YDWEEventDamageData___EVENT_DAMAGE_DATA_DAMAGE_TYPE))
+		return damageType == ConvertDamageType(EXGetEventDamageData(YDWEEventDamageData__EVENT_DAMAGE_DATA_DAMAGE_TYPE))
 	endfunction
  function YDWEIsEventWeaponType takes weapontype weaponType returns boolean
-		return weaponType == ConvertWeaponType(EXGetEventDamageData(YDWEEventDamageData___EVENT_DAMAGE_DATA_WEAPON_TYPE))
+		return weaponType == ConvertWeaponType(EXGetEventDamageData(YDWEEventDamageData__EVENT_DAMAGE_DATA_WEAPON_TYPE))
 	endfunction
 	
  function YDWEIsEventAttackType takes attacktype attackType returns boolean
-		return attackType == ConvertAttackType(EXGetEventDamageData(YDWEEventDamageData___EVENT_DAMAGE_DATA_ATTACK_TYPE))
+		return attackType == ConvertAttackType(EXGetEventDamageData(YDWEEventDamageData__EVENT_DAMAGE_DATA_ATTACK_TYPE))
 	endfunction
 	
  function YDWESetEventDamage takes real amount returns boolean
@@ -1440,9 +1441,9 @@ function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
     local integer i= 0
     
     loop
-        exitwhen i >= YDWETriggerEvent__DamageEventNumber
-        if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
-            call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
+        exitwhen i >= YDWETriggerEvent___DamageEventNumber
+        if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
+            call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
         endif
         set i=i + 1
     endloop
@@ -1471,14 +1472,14 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
         return
     endif
         
-    if YDWETriggerEvent__DamageEventNumber == 0 then
+    if YDWETriggerEvent___DamageEventNumber == 0 then
         set yd_DamageEventTrigger=CreateTrigger()
         call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
         call YDWEAnyUnitDamagedEnumUnit()
     endif
     
-    set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
-    set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
+    set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
+    set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
 endfunction
 //===========================================================================  
 //�ƶ���Ʒ�¼� 
@@ -1489,9 +1490,9 @@ function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
     if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 		set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
     	loop
-        	exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
-        	if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
-        	    call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
+        	exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
+        	if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
+        	    call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
         	endif
         	set i=i + 1
     	endloop
@@ -1502,14 +1503,14 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
         return
     endif
         
-    if YDWETriggerEvent__MoveItemEventNumber == 0 then
-        set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
-        call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-        call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+    if YDWETriggerEvent___MoveItemEventNumber == 0 then
+        set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
+        call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+        call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
     endif
     
-    set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
-    set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
+    set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
+    set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
     return bj_lastMovedItemInItemSlot
@@ -1754,7 +1755,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Tue Oct 06 16:56:47 2020
+//   Date: Tue Oct 06 16:47:49 2020
 //   Map Author: 未知
 // 
 //===========================================================================
@@ -1800,7 +1801,8 @@ function CreateUnitsForPlayer0 takes nothing returns nothing
     local trigger t
     local real life
     set gg_unit_h001_0002=CreateUnit(p, 'h001', - 27418.7, 10581.2, 274.029)
-    set u=CreateUnit(p, 'H00O', - 26865.5, 9766.1, 118.513)
+    set u=CreateUnit(p, 'H00O', - 26861.6, 9687.3, 118.513)
+    set u=CreateUnit(p, 'hsor', - 26654.1, 9397.5, 51.462)
 endfunction
 //===========================================================================
 function CreateUnitsForPlayer6 takes nothing returns nothing
@@ -1811,13 +1813,6 @@ function CreateUnitsForPlayer6 takes nothing returns nothing
     local real life
     set u=CreateUnit(p, 'u005', - 27252.0, 9223.4, 199.265)
     set u=CreateUnit(p, 'u005', - 27264.1, 8804.2, 98.133)
-    set u=CreateUnit(p, 'u00E', - 25605.0, 10743.3, 211.032)
-    set u=CreateUnit(p, 'u01B', - 25427.6, 10619.4, 61.031)
-    set u=CreateUnit(p, 'u01F', - 25885.8, 10322.5, 203.297)
-    set u=CreateUnit(p, 'u01F', - 25759.2, 10325.9, 247.991)
-    set u=CreateUnit(p, 'u02B', - 25039.1, 10979.2, 119.128)
-    set u=CreateUnit(p, 'u02B', - 25120.8, 10448.3, 124.743)
-    set u=CreateUnit(p, 'u029', - 25581.4, 11202.4, 342.817)
 endfunction
 //===========================================================================
 function CreateUnitsForPlayer9 takes nothing returns nothing
@@ -3208,37 +3203,18 @@ endfunction
 // Trigger: SelectEvent
 //===========================================================================
 function Trig_SelectEventFunc001Func001Conditions takes nothing returns nothing
-    local integer ydul_i
     if ( ( HaveSavedBoolean(YDHT, GetUnitTypeId(GetTriggerUnit()), 0x3D45B913) == true ) ) then
-        if ( ( HaveSavedBoolean(YDHT, GetHandleId(GetTriggerPlayer()), 0x7A60DF48) == true ) ) then
-            if ( ( GetTriggerPlayer() == GetLocalPlayer() ) ) then
-                set ydul_i=0
-                loop
-                    exitwhen ydul_i > 3
-                    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()), 0xDDFE2744, (LoadInteger(YDHT, ((GetHandleId((GetTriggerPlayer()))) ), ( ydul_i)))) // INLINED!!
-                    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()), 0xB2CB6B32, S2I(EXExecuteScript("(require'jass.slk').unit[" + I2S(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()), 0xDDFE2744)) + "].level")))
-                    if ( ( LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()), 0xB2CB6B32) > 1 ) ) then
-                        call DzFrameShow(udg_CardCircleEff[ydul_i], true)
-                    else
-                    endif
-                    call DzFrameShow(udg_CardFrontEff[ydul_i], true)
-                    call DzFrameShow(udg_CardBtn[ydul_i], true)
-                    set ydul_i=ydul_i + 1
-                endloop
-            else
-            endif
+        if ( ( GetTriggerPlayer() == GetLocalPlayer() ) ) then
+            call DzFrameShow(udg_ZhaoMuPanel, true)
+            call DzFrameClearAllPoints(DzFrameGetTooltip())
+            call DzFrameSetPoint(DzFrameGetTooltip(), 8, DzGetGameUI(), 8, 0.00, 0.2)
         else
         endif
     else
         if ( ( GetTriggerPlayer() == GetLocalPlayer() ) ) then
-            set ydul_i=0
-            loop
-                exitwhen ydul_i > 3
-                call DzFrameShow(udg_CardCircleEff[ydul_i], false)
-                call DzFrameShow(udg_CardFrontEff[ydul_i], false)
-                call DzFrameShow(udg_CardBtn[ydul_i], false)
-                set ydul_i=ydul_i + 1
-            endloop
+            call DzFrameShow(udg_ZhaoMuPanel, false)
+            call DzFrameClearAllPoints(DzFrameGetTooltip())
+            call DzFrameSetPoint(DzFrameGetTooltip(), 8, DzGetGameUI(), 8, 0.00, 0.143)
         else
         endif
     endif
@@ -3250,8 +3226,6 @@ function Trig_SelectEventActions takes nothing returns nothing
     loop
         exitwhen ydul_i > 4
         set ydl_trigger=CreateTrigger()
-        call SaveInteger(YDLOC, GetHandleId(ydl_trigger), 0xB2CB6B32, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()), 0xECE825E7), 0xB2CB6B32))
-        call SaveInteger(YDLOC, GetHandleId(ydl_trigger), 0xDDFE2744, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()), 0xECE825E7), 0xDDFE2744))
         call TriggerRegisterPlayerSelectionEventBJ(ydl_trigger, ConvertedPlayer(ydul_i), true)
         call TriggerAddCondition(ydl_trigger, Condition(function Trig_SelectEventFunc001Func001Conditions))
         set ydul_i=ydul_i + 1
@@ -3267,7 +3241,7 @@ endfunction
 //===========================================================================
 // Trigger: SelectCard
 //===========================================================================
-function Trig_SelectCardFunc008T takes nothing returns nothing
+function Trig_SelectCardFunc009T takes nothing returns nothing
     local integer ydul_i
     call SaveInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820, ( LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820) + 1 ))
     if ( ( LoadPlayerHandle(YDLOC, GetHandleId(GetExpiredTimer()), 0xA59BB4C6) == GetLocalPlayer() ) ) then
@@ -3322,11 +3296,19 @@ function Trig_SelectCardActions takes nothing returns nothing
         return
     else
     endif
-    call SaveInteger(YDHT, ((GetHandleId((LoadPlayerHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA59BB4C6)))) ), ( LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA707D18B) ), ( 0)) // INLINED!!
+    call UnitAddItem(GetTriggerUnit(), GetLastCreatedItem())
+    set ydul_i=0
+    loop
+        exitwhen ydul_i > 3
+        call SaveInteger(YDHT, ((GetHandleId((LoadPlayerHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA59BB4C6)))) ), ( ydul_i ), ( 0)) // INLINED!!
+        set ydul_i=ydul_i + 1
+    endloop
     if ( ( LoadPlayerHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA59BB4C6) == GetLocalPlayer() ) ) then
         set ydul_i=0
         loop
             exitwhen ydul_i > 3
+            call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, udg_CardSelectFrame[ydul_i])
+            call SaveReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08C9F4BA, 0.06)
             if ( ( LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA707D18B) == ydul_i ) ) then
                 call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 4, DzFrameGetCommandBarButton(0, ydul_i), 4, - 0.0008, LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08C9F4BA))
                 call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0.055, 0.058)
@@ -3334,7 +3316,7 @@ function Trig_SelectCardActions takes nothing returns nothing
                 call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0.06, 0.068)
                 call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 4, DzFrameGetCommandBarButton(0, ydul_i), 4, - 0.0008, ( ( LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08C9F4BA) ) + ( 0.003 ) ))
             endif
-            call DzFrameShow(udg_CardSelectFrame[ydul_i], true)
+            call DzFrameShow(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), true)
             set ydul_i=ydul_i + 1
         endloop
     else
@@ -3343,7 +3325,7 @@ function Trig_SelectCardActions takes nothing returns nothing
     call SaveInteger(YDLOC, GetHandleId(ydl_timer), 0x25DAB820, 0)
     call SaveInteger(YDLOC, GetHandleId(ydl_timer), 0xA707D18B, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA707D18B))
     call SavePlayerHandle(YDLOC, GetHandleId(ydl_timer), 0xA59BB4C6, LoadPlayerHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA59BB4C6))
-    call TimerStart(ydl_timer, 0.03, true, function Trig_SelectCardFunc008T)
+    call TimerStart(ydl_timer, 0.03, true, function Trig_SelectCardFunc009T)
     call FlushChildHashtable(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
     set ydl_timer=null
 endfunction
@@ -4099,7 +4081,7 @@ endfunction
 //===========================================================================
 // Trigger: UIInit
 //===========================================================================
-function Trig_UIInitFunc016Func004003 takes nothing returns nothing
+function Trig_UIInitFunc024Func004003 takes nothing returns nothing
     call DzSyncData("SelectCard", LoadStr(YDHT, ((DzGetTriggerUIEventFrame())), 0xB9B8D73D)) // INLINED!!
 endfunction
 function Trig_UIInitActions takes nothing returns nothing
@@ -4121,32 +4103,40 @@ function Trig_UIInitActions takes nothing returns nothing
     call DzFrameSetPoint(udg_TimeTxt, 1, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), 1, 0.00, - 0.026)
     call DzFrameSetText(udg_TimeTxt, "|CffFFC92660|r")
     // 刷卡UI
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31, DzCreateFrameByTagName("BACKDROP", "name", DzGetGameUI(), "UI_Top_Frame", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), 8, DzGetGameUI(), 8, - 0.006, 0.142)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), 0.22, 0.06)
+    set udg_ZhaoMuPanel=LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "text012", 0))
+    call DzFrameSetFont(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), "fonts.ttf", 0.015, 0)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), 3, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), 3, 0.005, 0.00)
+    call DzFrameSetText(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), "|CffFFC926刷将区:|r")
     call SaveReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA6162FFF, 0.00)
     call SaveReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08C9F4BA, 0.06)
     set ydul_i=0
     loop
         exitwhen ydul_i > 3
-        set udg_CardBtn[ydul_i]=DzCreateFrame(( "UI_Hero_Btn" + I2S(ydul_i) ), DzGetGameUI(), 0)
+        set udg_CardBtn[ydul_i]=DzCreateFrame(( "UI_Hero_Btn" + I2S(ydul_i) ), LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), 0)
         call DzFrameSetPoint(udg_CardBtn[ydul_i], 4, DzFrameGetCommandBarButton(0, ydul_i), 4, 0, LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08C9F4BA))
         call DzFrameSetSize(udg_CardBtn[ydul_i], 0.038, 0.042)
-        call DzFrameSetScriptByCode(udg_CardBtn[ydul_i], 1, function Trig_UIInitFunc016Func004003, false)
+        call DzFrameSetScriptByCode(udg_CardBtn[ydul_i], 1, function Trig_UIInitFunc024Func004003, false)
         call SaveStr(YDHT, ((udg_CardBtn[ydul_i])), 0xB9B8D73D, I2S(ydul_i)) // INLINED!!
         set udg_CardFrame[ydul_i]=DzFrameFindByName(( ( "UI_Hero_Btn" ) + ( I2S(ydul_i) ) + ( "_1" ) ), 0)
         call DzFrameShow(udg_CardBtn[ydul_i], false)
         // 刷卡特效UI
-        call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", DzGetGameUI(), "UI_BACKDROP", 0))
+        call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
         call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 4, DzFrameGetCommandBarButton(0, ydul_i), 4, - 0.0005, ( ( 0.0015 ) + ( LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08C9F4BA) ) ))
         call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0.055, 0.058)
         set udg_CardFrontEff[ydul_i]=LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490)
         call DzFrameShow(udg_CardFrontEff[ydul_i], false)
         // 转圈特效UI
-        call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", DzGetGameUI(), "UI_BACKDROP", 0))
+        call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
         call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 4, DzFrameGetCommandBarButton(0, ydul_i), 4, - 0.0005, ( ( 0.0008 ) + ( LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08C9F4BA) ) ))
         call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0.055, 0.058)
         set udg_CardCircleEff[ydul_i]=LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490)
         call DzFrameShow(udg_CardCircleEff[ydul_i], false)
         // 选中特效UI
-        call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", DzGetGameUI(), "UI_BACKDROP", 0))
+        call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
         call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 4, DzFrameGetCommandBarButton(0, ydul_i), 4, - 0.0008, LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08C9F4BA))
         call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0.055, 0.058)
         set udg_CardSelectFrame[ydul_i]=LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490)
@@ -4328,7 +4318,7 @@ endfunction
 //===========================================================================
 // Trigger: GlobeInit
 //===========================================================================
-function Trig_GlobeInitFunc013Func002Func010T takes nothing returns nothing
+function Trig_GlobeInitFunc016Func002Func010T takes nothing returns nothing
     local integer ydl_triggerstep
     local trigger ydl_trigger
     call SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, 2800.00, 1.00)
@@ -4345,7 +4335,7 @@ function Trig_GlobeInitFunc013Func002Func010T takes nothing returns nothing
     call DestroyTimer(GetExpiredTimer())
     set ydl_trigger=null
 endfunction
-function Trig_GlobeInitFunc026A takes nothing returns nothing
+function Trig_GlobeInitFunc029A takes nothing returns nothing
     local integer ydl_triggerstep
     local trigger ydl_trigger
     set ydl_trigger=gg_trg_RefushCard
@@ -4377,6 +4367,9 @@ function Trig_GlobeInitActions takes nothing returns nothing
     set ydl_trigger=gg_trg_Camera
     set ydl_triggerstep=GetHandleId(ydl_trigger) * ( LoadInteger(YDLOC, GetHandleId(ydl_trigger), 0xCFDE6C76) + 3 )
     call TriggerExecute(ydl_trigger)
+    // Tips
+    call DzFrameClearAllPoints(DzFrameGetTooltip())
+    call DzFrameSetPoint(DzFrameGetTooltip(), 8, DzGetGameUI(), 8, 0.00, 0.143)
     set ydul_i=1
     loop
         exitwhen ydul_i > 4
@@ -4395,7 +4388,7 @@ function Trig_GlobeInitActions takes nothing returns nothing
             call SaveEffectHandle(YDLOC, GetHandleId(ydl_timer), 0xCDD27586, LoadEffectHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xCDD27586))
             call SaveLocationHandle(YDLOC, GetHandleId(ydl_timer), 0x32A9E4C8, LoadLocationHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x32A9E4C8))
             call SaveUnitHandle(YDLOC, GetHandleId(ydl_timer), 0xB6A6EBAA, LoadUnitHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB6A6EBAA))
-            call TimerStart(ydl_timer, 1.00, false, function Trig_GlobeInitFunc013Func002Func010T)
+            call TimerStart(ydl_timer, 1.00, false, function Trig_GlobeInitFunc016Func002Func010T)
         else
         endif
         set ydul_i=ydul_i + 1
@@ -4425,7 +4418,7 @@ function Trig_GlobeInitActions takes nothing returns nothing
         call Cheat("greedisgood 999999")
     else
     endif
-    call ForForce(udg_playerGroup, function Trig_GlobeInitFunc026A)
+    call ForForce(udg_playerGroup, function Trig_GlobeInitFunc029A)
     call FlushChildHashtable(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
     set ydl_trigger=null
     set ydl_timer=null
