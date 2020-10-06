@@ -24,6 +24,47 @@ Frame "BACKDROP" "UI_BACKDROP" {
     BackdropBlendAll,
 }
 
+//英雄按钮0
+Frame "BUTTON" "UI_Hero_Btn0" {
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ControlBackdrop "UI_Hero_Btn0_1",
+    Frame "BACKDROP" "UI_Hero_Btn0_1" {
+        BackdropBackground  "blank.blp",
+        BackdropBlendAll,
+    }
+}
+
+//英雄按钮1
+Frame "BUTTON" "UI_Hero_Btn1" {
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ControlBackdrop "UI_Hero_Btn1_1",
+    Frame "BACKDROP" "UI_Hero_Btn1_1" {
+        BackdropBackground  "blank.blp",
+        BackdropBlendAll,
+    }
+}
+
+//英雄按钮2
+Frame "BUTTON" "UI_Hero_Btn2" {
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ControlBackdrop "UI_Hero_Btn2_1",
+    Frame "BACKDROP" "UI_Hero_Btn2_1" {
+        BackdropBackground  "blank.blp",
+        BackdropBlendAll,
+    }
+}
+
+//英雄按钮3
+Frame "BUTTON" "UI_Hero_Btn3" {
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ControlBackdrop "UI_Hero_Btn3_1",
+    Frame "BACKDROP" "UI_Hero_Btn3_1" {
+        BackdropBackground  "blank.blp",
+        BackdropBlendAll,
+    }
+}
+
+
 
 //顶部菜单
 Frame "BACKDROP" "UI_Top_Frame" {
