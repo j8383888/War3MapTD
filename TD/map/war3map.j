@@ -25,10 +25,10 @@ real yd_MapMaxX= 0
 real yd_MapMinX= 0
 real yd_MapMaxY= 0
 real yd_MapMinY= 0
-string array YDWEBase__yd_PlayerColor
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber= 0
+string array YDWEBase___yd_PlayerColor
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber= 0
 //endglobals from YDWEBase
 //globals from YDWEEventDamageData:
 constant boolean LIBRARY_YDWEEventDamageData=true
@@ -1111,11 +1111,11 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
  local integer i= 0
     loop
-        exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-        if YDWEBase__AbilityCastingOverEventType[i] == index then
+        exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+        if YDWEBase___AbilityCastingOverEventType[i] == index then
             set bj_lastAbilityCastingUnit=hero
-			if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-				call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+			if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+				call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 			endif
 		endif
         set i=i + 1
@@ -1125,9 +1125,9 @@ endfunction
 //YDWE技能捕捉事件 
 //===========================================================================  
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-	set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-	set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-	set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+	set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+	set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+	set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction 
 //===========================================================================
 //系统函数完善
@@ -1164,7 +1164,7 @@ endfunction
 //unitpool bj_lastCreatedPool=null
 //unit bj_lastPoolAbstractedUnit=null
 function YDWEGetPlayerColorString takes player p,string s returns string
-    return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+    return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 //===========================================================================
 //===========================================================================
@@ -1211,22 +1211,22 @@ function InitializeYD takes nothing returns nothing
 	set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 	set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
 	
-    set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
-    set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
-    set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
-    set YDWEBase__yd_PlayerColor[3]="|cFF540081"
-    set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
-    set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
-    set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
-    set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
-    set YDWEBase__yd_PlayerColor[8]="|cFF959697"
-    set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
-    set YDWEBase__yd_PlayerColor[10]="|cFF106246"
-    set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
-    set YDWEBase__yd_PlayerColor[12]="|cFF282828"
-    set YDWEBase__yd_PlayerColor[13]="|cFF282828"
-    set YDWEBase__yd_PlayerColor[14]="|cFF282828"
-    set YDWEBase__yd_PlayerColor[15]="|cFF282828"
+    set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
+    set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
+    set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
+    set YDWEBase___yd_PlayerColor[3]="|cFF540081"
+    set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
+    set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
+    set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
+    set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
+    set YDWEBase___yd_PlayerColor[8]="|cFF959697"
+    set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
+    set YDWEBase___yd_PlayerColor[10]="|cFF106246"
+    set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
+    set YDWEBase___yd_PlayerColor[12]="|cFF282828"
+    set YDWEBase___yd_PlayerColor[13]="|cFF282828"
+    set YDWEBase___yd_PlayerColor[14]="|cFF282828"
+    set YDWEBase___yd_PlayerColor[15]="|cFF282828"
     //=================显示版本=====================
     call YDWEVersion_Init()
 endfunction
@@ -1755,7 +1755,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Tue Oct 06 17:02:47 2020
+//   Date: Wed Oct 07 16:06:10 2020
 //   Map Author: 未知
 // 
 //===========================================================================
@@ -2169,14 +2169,6 @@ function Trig_RandomActions takes nothing returns nothing
     // 参数意义：SmGetRandomInt(最小,最大,数量)
     // 参数规范:(最小>0) 且 (最大>最小) 且 (数量<(最大-最小))
     if ( ( SmGetRandomInt(1 , udg_CardGroupLen , 4) ) ) then
-        set bj_forLoopAIndex=0
-        set bj_forLoopAIndexEnd=3
-        loop
-            exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
-            // 此处为演示
-            call DisplayTextToPlayer(Player(0), 0, 0, ( "生成随机数：" + I2S(udg_SmRandomInt[bj_forLoopAIndex]) ))
-            set bj_forLoopAIndex=bj_forLoopAIndex + 1
-        endloop
     else
         // 如果参数填写不符合格式，函数不会运行
         call BJDebugMsg("随机数参数不正确")
@@ -3338,7 +3330,7 @@ endfunction
 //===========================================================================
 // Trigger: RefushCard
 //===========================================================================
-function Trig_RefushCardFunc006T takes nothing returns nothing
+function Trig_RefushCardFunc005T takes nothing returns nothing
     local integer ydul_i
     call SaveInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820, ( LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820) + 1 ))
     if ( ( LoadInteger(YDLOC, GetHandleId(GetExpiredTimer()), 0x25DAB820) == 2 ) ) then
@@ -3407,7 +3399,6 @@ function Trig_RefushCardActions takes nothing returns nothing
     set ydl_triggerstep=GetHandleId(ydl_trigger) * ( LoadInteger(YDLOC, GetHandleId(ydl_trigger), 0xCFDE6C76) + 3 )
     call SavePlayerHandle(YDLOC, ydl_triggerstep, 0xA59BB4C6, LoadPlayerHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA59BB4C6))
     call TriggerExecute(ydl_trigger)
-    call SaveBoolean(YDHT, GetHandleId(LoadPlayerHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA59BB4C6)), 0x7A60DF48, true)
     set ydl_trigger=gg_trg_Random
     set ydl_triggerstep=GetHandleId(ydl_trigger) * ( LoadInteger(YDLOC, GetHandleId(ydl_trigger), 0xCFDE6C76) + 3 )
     call TriggerExecute(ydl_trigger)
@@ -3429,7 +3420,7 @@ function Trig_RefushCardActions takes nothing returns nothing
     call SaveInteger(YDLOC, GetHandleId(ydl_timer), 0xB2CB6B32, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB2CB6B32))
     call SavePlayerHandle(YDLOC, GetHandleId(ydl_timer), 0xA59BB4C6, LoadPlayerHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA59BB4C6))
     call SaveInteger(YDLOC, GetHandleId(ydl_timer), 0xDDFE2744, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xDDFE2744))
-    call TimerStart(ydl_timer, 0.05, true, function Trig_RefushCardFunc006T)
+    call TimerStart(ydl_timer, 0.05, true, function Trig_RefushCardFunc005T)
     call FlushChildHashtable(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
     set ydl_trigger=null
     set ydl_timer=null
@@ -3450,7 +3441,7 @@ function Trig_ClearCardEffActions takes nothing returns nothing
  call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
  call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
     call PauseTimer(LoadTimerHandle(YDHT, GetHandleId(LoadPlayerHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA59BB4C6)), 0xB5EAC723))
-    call RemoveSavedBoolean(YDHT, GetHandleId(LoadPlayerHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA59BB4C6)), 0x7A60DF48)
+    call PauseTimer(LoadTimerHandle(YDHT, GetHandleId(LoadPlayerHandle(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA59BB4C6)), 0xFDBC8966))
     set ydul_i=0
     loop
         exitwhen ydul_i > 3
@@ -3458,6 +3449,7 @@ function Trig_ClearCardEffActions takes nothing returns nothing
             call DzFrameShow(udg_CardCircleEff[ydul_i], false)
             call DzFrameShow(udg_CardFrontEff[ydul_i], false)
             call DzFrameShow(udg_CardBtn[ydul_i], false)
+            call DzFrameShow(udg_CardSelectFrame[ydul_i], false)
         else
         endif
         set ydul_i=ydul_i + 1
@@ -4105,7 +4097,7 @@ function Trig_UIInitActions takes nothing returns nothing
     // 刷卡UI
     call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31, DzCreateFrameByTagName("BACKDROP", "name", DzGetGameUI(), "UI_Top_Frame", 0))
     call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), 8, DzGetGameUI(), 8, - 0.006, 0.142)
-    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), 0.22, 0.06)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), 0.276, 0.042)
     set udg_ZhaoMuPanel=LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31)
     call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "text012", 0))
     call DzFrameSetFont(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), "fonts.ttf", 0.015, 0)
@@ -4143,6 +4135,107 @@ function Trig_UIInitActions takes nothing returns nothing
         call DzFrameShow(udg_CardSelectFrame[ydul_i], false)
         set ydul_i=ydul_i + 1
     endloop
+    call SaveReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD, 0.21)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31, DzCreateFrameByTagName("BACKDROP", "name", DzGetGameUI(), "UI_BACKDROP_ALPHA", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), 8, DzGetGameUI(), 8, 0.00, 0.2)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD), 0.02)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1D3D6053, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1D3D6053), "UIAsset\\CardFrameU_3.tga", 0)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1D3D6053), 0, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), 0, 0.00, 0.00)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1D3D6053), LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD), 0.042)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08568A94, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP_ALPHA", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08568A94), 0, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1D3D6053), 6, 0.00, 0.00)
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08568A94), "UIAsset\\CardFrameM_3.tga", 0)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08568A94), LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD), 0.1)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBBE48693, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP_ALPHA", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBBE48693), 0, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08568A94), 6, 0.00, 0.00)
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBBE48693), "UIAsset\\CardFrameD_3.tga", 0)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBBE48693), LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD), 0.042)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB4100BEC, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB4100BEC), "ReplaceableTextures\\CommandButtons\\BTNRifleman.blp", 0)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB4100BEC), 0, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1D3D6053), 0, 0.008, - 0.01)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB4100BEC), 0.035, 0.04)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "text012", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), 3, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB4100BEC), 5, 0.005, 0.00)
+    call DzFrameSetText(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), "|CffFFC926名字|r")
+    call DzFrameSetFont(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), "fonts.ttf", 0.015, 0)
+    // 金币
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), "UIAsset\\ResourceGold.blp", 0)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB4100BEC), 0, 0.14, 0.00)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0.018, 0.023)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "text012", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), 3, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 5, 0.005, 0.00)
+    call DzFrameSetText(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), "|CffFFBF001500|r")
+    // 食物
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), "UIAsset\\ResourceFood.blp", 0)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 6, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB4100BEC), 6, 0.14, - 0.005)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0.018, 0.023)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "text012", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), 3, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 5, 0.005, 0.00)
+    call DzFrameSetText(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), "|CffD936003|r")
+    // 技能名字[主动]
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "text012", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), 6, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1D3D6053), 6, 0.01, - 0.025)
+    call DzFrameSetText(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), "主动：[哈哈哈]")
+    // 技能描述[主动]
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA0536D06, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "text010", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA0536D06), 0, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), 6, 0.00, - 0.005)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA0536D06), ( ( LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD) ) - ( 0.02 ) ), 0.025)
+    call DzFrameSetText(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA0536D06), "动作敏捷的飞行单位，骑乘一位精灵族战士。拥有空中锁镣技能，可以暂时禁锢和残废敌空中单位。可以学习到训兽术和乌云技能。|")
+    // 分割线
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), "UIAsset\\fengexian.blp", 1)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), ( LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD) - 0.02 ), 0.02)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA0536D06), 6, 0.00, 0.01)
+    // 技能名字[被动]
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "text012", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), 6, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 6, 0.00, - 0.01)
+    call DzFrameSetText(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), "被动：[哈哈哈]")
+    //  - 三星解锁
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA0536D06, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "text012", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA0536D06), 3, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), 5, 0.00, 0.00)
+    call DzFrameSetText(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA0536D06), "|CffD1D1CA - 三星解锁|r")
+    // 技能描述[被动]
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE3BF018A, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "text010", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE3BF018A), 0, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), 6, 0.00, - 0.005)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE3BF018A), ( ( LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD) ) - ( 0.02 ) ), 0.025)
+    call DzFrameSetText(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE3BF018A), "动作敏捷的飞行单位，骑乘一位精灵族战士。拥有空中锁镣技能，可以暂时禁锢和残废敌空中单位。可以学习到训兽术和乌云技能。|")
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08568A94), 8, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE3BF018A), 8, 0.01, 0.00)
+    // 分割线
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), "UIAsset\\fengexian.blp", 1)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), ( LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD) - 0.02 ), 0.02)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE3BF018A), 6, 0.00, 0.01)
+    // 特性
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xCB8E55B3, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xCB8E55B3), "UIAsset\\zhaohuan.blp", 0)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xCB8E55B3), 0.043, 0.026)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xCB8E55B3), 0, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 6, 0.00, 0.005)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xFA6DB334, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xFA6DB334), "UIAsset\\wuli.blp", 0)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xFA6DB334), 0.043, 0.026)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xFA6DB334), 3, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xCB8E55B3), 5, 0.00, 0.00)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x098D9C20, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x098D9C20), "UIAsset\\mofa.blp", 0)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x098D9C20), 0.043, 0.026)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x098D9C20), 3, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xFA6DB334), 5, 0.00, 0.00)
+    // logo
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), "UIAsset\\chuanshuo.blp", 0)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 0.069, 0.084)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 8, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBBE48693), 8, - 0.01, 0.01)
+    call SaveReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9F0C6E00, ( ( DzFrameGetHeight(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1D3D6053)) ) + ( DzFrameGetHeight(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x08568A94)) ) + ( DzFrameGetHeight(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBBE48693)) ) ))
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD), LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9F0C6E00))
+    // exp
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490, DzCreateFrameByTagName("BACKDROP", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A5D9A31), "UI_BACKDROP", 0))
+    call DzFrameSetTexture(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), "UIAsset\\CardFrameSimple_1.tga", 0)
+    call DzFrameSetSize(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), LoadReal(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x234C03BD), 0.032)
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 8, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1D3D6053), 2, 0.00, 0.00)
+    call SaveInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060, DzCreateFrameByTagName("TEXT", "name", LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), "text012", 0))
+    call DzFrameSetPoint(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), 3, LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC7389490), 3, 0.01, 0.00)
+    call DzFrameSetText(LoadInteger(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2DA1D060), "|Cff73DCFFLV2|r")
     call FlushChildHashtable(YDLOC, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 endfunction
 //===========================================================================

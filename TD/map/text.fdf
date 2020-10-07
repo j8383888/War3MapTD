@@ -24,6 +24,15 @@ Frame "BACKDROP" "UI_BACKDROP" {
     BackdropBlendAll,
 }
 
+//图片
+Frame "BACKDROP" "UI_BACKDROP_ALPHA" {
+    Height 0.02,
+    Width 0.02,
+    BackdropBackground  "war3mapImported\alpha.tga",
+    BackdropTileBackground,
+    BackdropBlendAll,
+}
+
 //英雄按钮0
 Frame "BUTTON" "UI_Hero_Btn0" {
     ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
@@ -331,7 +340,7 @@ Frame "TEXT" "text009" {
 }
 Frame "TEXT" "text010" {
     FrameFont "fonts.ttf", 0.010, "",
-    FontJustificationH JUSTIFYRIGHT,
+    FontJustificationH JUSTIFYLEFT,
     FontJustificationV JUSTIFYMIDDLE,
     FontFlags "FIXEDSIZE",
     FontColor 1.0 1.0 1.0 1.0,
