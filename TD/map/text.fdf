@@ -44,7 +44,7 @@ Frame "BUTTON" "UI_Hero_Btn0" {
     ControlMouseOverHighlight "UI_Hero_Btn0_4",
     Frame "HIGHLIGHT" "UI_Hero_Btn0_4" {
         HighlightType "FILETEXTURE",
-        HighlightAlphaFile "UI\Widgets\EscMenu\Human\quest-button-highlight.blp",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\human-options-button-highlight.blp",
         HighlightAlphaMode "ADD",
     }
 }
@@ -60,7 +60,7 @@ Frame "BUTTON" "UI_Hero_Btn1" {
     ControlMouseOverHighlight "UI_Hero_Btn1_4",
     Frame "HIGHLIGHT" "UI_Hero_Btn1_4" {
         HighlightType "FILETEXTURE",
-        HighlightAlphaFile "UI\Widgets\EscMenu\Human\quest-button-highlight.blp",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\human-options-button-highlight.blp",
         HighlightAlphaMode "ADD",
     }
 }
@@ -76,7 +76,7 @@ Frame "BUTTON" "UI_Hero_Btn2" {
     ControlMouseOverHighlight "UI_Hero_Btn2_4",
     Frame "HIGHLIGHT" "UI_Hero_Btn2_4" {
         HighlightType "FILETEXTURE",
-        HighlightAlphaFile "UI\Widgets\EscMenu\Human\quest-button-highlight.blp",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\human-options-button-highlight.blp",
         HighlightAlphaMode "ADD",
     }
 }
@@ -92,7 +92,7 @@ Frame "BUTTON" "UI_Hero_Btn3" {
     ControlMouseOverHighlight "UI_Hero_Btn3_4",
     Frame "HIGHLIGHT" "UI_Hero_Btn3_4" {
         HighlightType "FILETEXTURE",
-        HighlightAlphaFile "UI\Widgets\EscMenu\Human\quest-button-highlight.blp",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\human-options-button-highlight.blp",
         HighlightAlphaMode "ADD",
     }
 }
@@ -398,4 +398,38 @@ Frame "TEXTBUTTON" "ButtonTemplateBTN2" {
 		HighlightAlphaMode "ADD",
 		HighlightColor 1 1 1 0.1,
 	}
+}
+
+//分享按钮
+Frame "BUTTON" "UI_BTN_ShareA" {
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ControlBackdrop "UI_BTN_ShareA1",
+    Frame "BACKDROP" "UI_BTN_ShareA1" {
+        BackdropBackground  "UIAsset\entry.tga",
+        BackdropBlendAll,
+    }
+    //高亮
+    ControlMouseOverHighlight "UI_BTN_ShareA4",
+    Frame "HIGHLIGHT" "UI_BTN_ShareA4" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\human-options-button-highlight.blp",
+        HighlightAlphaMode "ADD",
+    }
+}
+
+//分享按钮
+Frame "BUTTON" "UI_BTN_ShareB" {
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ControlBackdrop "UI_BTN_ShareB1",
+    Frame "BACKDROP" "UI_BTN_ShareB1" {
+        BackdropBackground  "UIAsset\entry2.tga",
+        BackdropBlendAll,
+    }
+    //高亮
+    ControlMouseOverHighlight "UI_BTN_ShareB4",
+    Frame "HIGHLIGHT" "UI_BTN_ShareB4" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "UI\Widgets\EscMenu\Human\human-options-button-highlight.blp",
+        HighlightAlphaMode "ADD",
+    }
 }
