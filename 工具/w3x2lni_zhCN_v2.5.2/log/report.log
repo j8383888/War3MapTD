@@ -1,24 +1,6 @@
-输入路径：D:/War3MapTD/TD.w3x
-输出路径：D:/War3MapTD/TD
-输入格式：Mpq
-输出模式：lni
-结果：0 个错误，1 条警告
-用时：0.481 秒
-==========================
-警告 (1)
-==========================
-没有转换触发器 - 请设置YDWE关联地图
-stack traceback:
-	[C]: in function 'error'
-	.\core\slk/frontend_trg.lua:86: in method 'frontend_trg'
-	.\core\slk/frontend_wtg.lua:236: in method 'frontend_wtg'
-	.\core\slk/backend.lua:65: in function <.\core\slk/backend.lua:64>
-	[C]: in function 'xpcall'
-	.\core\slk/backend.lua:64: in upvalue 'convert_wtg'
-	.\core\slk/backend.lua:407: in method 'backend'
-	.\backend\convert.lua:140: in function 'backend.convert'
-	.\backend\cli\lni.lua:4: in function 'backend.cli.lni'
-	.\backend\init.lua:12: in main chunk
-	[C]: in function 'require'
-	D:\War3MapTD\工具\w3x2lni_zhCN_v2.5.2\script\main.lua:2: in main chunk
-	[C]: in ?
+输入路径：D:/War3MapTD/TD
+输出路径：D:/War3MapTD/TD.w3x
+输入格式：Lni
+输出模式：obj
+结果：0 个错误，0 条警告
+用时：1.573 秒
