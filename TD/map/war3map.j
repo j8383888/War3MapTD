@@ -90,24 +90,24 @@ constant integer YDWE_OBJECT_TYPE_DESTRUCTABLE= 6
 //endglobals from YDWEYDWEJapiScript
 //globals from YDWETimerSystem:
 constant boolean LIBRARY_YDWETimerSystem=true
-integer YDWETimerSystem__CurrentTime
-integer YDWETimerSystem__CurrentIndex
-integer YDWETimerSystem__TaskListHead
-integer YDWETimerSystem__TaskListIdleHead
-integer YDWETimerSystem__TaskListIdleMax
-integer array YDWETimerSystem__TaskListIdle
-integer array YDWETimerSystem__TaskListNext
-integer array YDWETimerSystem__TaskListTime
-trigger array YDWETimerSystem__TaskListProc
-trigger YDWETimerSystem__fnRemoveUnit
-trigger YDWETimerSystem__fnDestroyTimer
-trigger YDWETimerSystem__fnRemoveItem
-trigger YDWETimerSystem__fnDestroyEffect
-trigger YDWETimerSystem__fnDestroyLightning
-trigger YDWETimerSystem__fnRunTrigger
-timer YDWETimerSystem__Timer
-integer YDWETimerSystem__TimerHandle
-integer YDWETimerSystem__TimerSystem_RunIndex= 0
+integer YDWETimerSystem___CurrentTime
+integer YDWETimerSystem___CurrentIndex
+integer YDWETimerSystem___TaskListHead
+integer YDWETimerSystem___TaskListIdleHead
+integer YDWETimerSystem___TaskListIdleMax
+integer array YDWETimerSystem___TaskListIdle
+integer array YDWETimerSystem___TaskListNext
+integer array YDWETimerSystem___TaskListTime
+trigger array YDWETimerSystem___TaskListProc
+trigger YDWETimerSystem___fnRemoveUnit
+trigger YDWETimerSystem___fnDestroyTimer
+trigger YDWETimerSystem___fnRemoveItem
+trigger YDWETimerSystem___fnDestroyEffect
+trigger YDWETimerSystem___fnDestroyLightning
+trigger YDWETimerSystem___fnRunTrigger
+timer YDWETimerSystem___Timer
+integer YDWETimerSystem___TimerHandle
+integer YDWETimerSystem___TimerSystem_RunIndex= 0
 //endglobals from YDWETimerSystem
     // User-defined
 group udg_HuoYuanSuGroup= null
@@ -559,7 +559,7 @@ endglobals
 
 //library BzAPI ends
 //library YDTriggerSaveLoadSystem:
-    function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+    function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
             set YDHT=InitHashtable()
         set YDLOC=InitHashtable()
     endfunction
@@ -1585,37 +1585,37 @@ endfunction
 
 //library YDWEYDWEJapiScript ends
 //library YDWETimerSystem:
-function YDWETimerSystem__NewTaskIndex takes nothing returns integer
- local integer h= YDWETimerSystem__TaskListIdleHead
-	if YDWETimerSystem__TaskListIdleHead < 0 then
-		if YDWETimerSystem__TaskListIdleMax >= 8000 then
+function YDWETimerSystem___NewTaskIndex takes nothing returns integer
+ local integer h= YDWETimerSystem___TaskListIdleHead
+	if YDWETimerSystem___TaskListIdleHead < 0 then
+		if YDWETimerSystem___TaskListIdleMax >= 8000 then
 			return 8100
 		else
-			set YDWETimerSystem__TaskListIdleMax=YDWETimerSystem__TaskListIdleMax + 1
-			return YDWETimerSystem__TaskListIdleMax
+			set YDWETimerSystem___TaskListIdleMax=YDWETimerSystem___TaskListIdleMax + 1
+			return YDWETimerSystem___TaskListIdleMax
 		endif
 	endif
-	set YDWETimerSystem__TaskListIdleHead=YDWETimerSystem__TaskListIdle[h]
+	set YDWETimerSystem___TaskListIdleHead=YDWETimerSystem___TaskListIdle[h]
 	return h
 endfunction
-function YDWETimerSystem__DeleteTaskIndex takes integer index returns nothing
-	set YDWETimerSystem__TaskListIdle[index]=YDWETimerSystem__TaskListIdleHead
-	set YDWETimerSystem__TaskListIdleHead=index
+function YDWETimerSystem___DeleteTaskIndex takes integer index returns nothing
+	set YDWETimerSystem___TaskListIdle[index]=YDWETimerSystem___TaskListIdleHead
+	set YDWETimerSystem___TaskListIdleHead=index
 endfunction
 //该函数序列处理
-function YDWETimerSystem__NewTask takes real time,trigger proc returns integer
- local integer index= YDWETimerSystem__NewTaskIndex()
- local integer h= YDWETimerSystem__TaskListHead
- local integer t= R2I(100. * time) + YDWETimerSystem__CurrentTime
+function YDWETimerSystem___NewTask takes real time,trigger proc returns integer
+ local integer index= YDWETimerSystem___NewTaskIndex()
+ local integer h= YDWETimerSystem___TaskListHead
+ local integer t= R2I(100. * time) + YDWETimerSystem___CurrentTime
  local integer p
-	set YDWETimerSystem__TaskListProc[index]=proc
-	set YDWETimerSystem__TaskListTime[index]=t
+	set YDWETimerSystem___TaskListProc[index]=proc
+	set YDWETimerSystem___TaskListTime[index]=t
 	loop
-		set p=YDWETimerSystem__TaskListNext[h]
-		if p < 0 or YDWETimerSystem__TaskListTime[p] >= t then
+		set p=YDWETimerSystem___TaskListNext[h]
+		if p < 0 or YDWETimerSystem___TaskListTime[p] >= t then
 		//	call BJDebugMsg("NewTask:"+I2S(index))
-			set YDWETimerSystem__TaskListNext[h]=index
-			set YDWETimerSystem__TaskListNext[index]=p
+			set YDWETimerSystem___TaskListNext[h]=index
+			set YDWETimerSystem___TaskListNext[index]=p
 			return index
 		endif
 		set h=p
@@ -1623,59 +1623,59 @@ function YDWETimerSystem__NewTask takes real time,trigger proc returns integer
 	return index
 endfunction
 function YDWETimerSystemNewTask takes real time,trigger proc returns integer
-	return YDWETimerSystem__NewTask(time , proc)
+	return YDWETimerSystem___NewTask(time , proc)
 endfunction
 function YDWETimerSystemGetCurrentTask takes nothing returns integer
-	return YDWETimerSystem__CurrentIndex
+	return YDWETimerSystem___CurrentIndex
 endfunction
 //删除单位
-function YDWETimerSystem__RemoveUnit_CallBack takes nothing returns nothing
-    call RemoveUnit(LoadUnitHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex))
-    call RemoveSavedHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex)
+function YDWETimerSystem___RemoveUnit_CallBack takes nothing returns nothing
+    call RemoveUnit(LoadUnitHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex))
+    call RemoveSavedHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex)
 endfunction
 function YDWETimerRemoveUnit takes real time,unit u returns nothing
-    call SaveUnitHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__NewTask(time , YDWETimerSystem__fnRemoveUnit), u)
+    call SaveUnitHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___NewTask(time , YDWETimerSystem___fnRemoveUnit), u)
 endfunction
 //摧毁计时器
-function YDWETimerSystem__DestroyTimer_CallBack takes nothing returns nothing
-    call DestroyTimer(LoadTimerHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex))
-    call RemoveSavedHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex)
+function YDWETimerSystem___DestroyTimer_CallBack takes nothing returns nothing
+    call DestroyTimer(LoadTimerHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex))
+    call RemoveSavedHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex)
 endfunction
 function YDWETimerDestroyTimer takes real time,timer t returns nothing
-    call SaveTimerHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__NewTask(time , YDWETimerSystem__fnDestroyTimer), t)
+    call SaveTimerHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___NewTask(time , YDWETimerSystem___fnDestroyTimer), t)
 endfunction
 //删除物品
-function YDWETimerSystem__RemoveItem_CallBack takes nothing returns nothing
-    call RemoveItem(LoadItemHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex))
-    call RemoveSavedHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex)
+function YDWETimerSystem___RemoveItem_CallBack takes nothing returns nothing
+    call RemoveItem(LoadItemHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex))
+    call RemoveSavedHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex)
 endfunction
 function YDWETimerRemoveItem takes real time,item it returns nothing
-    call SaveItemHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__NewTask(time , YDWETimerSystem__fnRemoveItem), it)
+    call SaveItemHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___NewTask(time , YDWETimerSystem___fnRemoveItem), it)
 endfunction
 //删除特效
-function YDWETimerSystem__DestroyEffect_CallBack takes nothing returns nothing
-    call DestroyEffect(LoadEffectHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex))
-    call RemoveSavedHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex)
+function YDWETimerSystem___DestroyEffect_CallBack takes nothing returns nothing
+    call DestroyEffect(LoadEffectHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex))
+    call RemoveSavedHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex)
 endfunction
 function YDWETimerDestroyEffect takes real time,effect e returns nothing
-    call SaveEffectHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__NewTask(time , YDWETimerSystem__fnDestroyEffect), e)
+    call SaveEffectHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___NewTask(time , YDWETimerSystem___fnDestroyEffect), e)
 endfunction
 //删除闪电特效
-function YDWETimerSystem__DestroyLightning_CallBack takes nothing returns nothing
-    call DestroyLightning(LoadLightningHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex))
-    call RemoveSavedHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex)
+function YDWETimerSystem___DestroyLightning_CallBack takes nothing returns nothing
+    call DestroyLightning(LoadLightningHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex))
+    call RemoveSavedHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex)
 endfunction
 function YDWETimerDestroyLightning takes real time,lightning lt returns nothing
- local integer i= YDWETimerSystem__NewTask(time , YDWETimerSystem__fnDestroyLightning)
-    call SaveLightningHandle(YDHT, YDWETimerSystem__TimerHandle, i, lt)
+ local integer i= YDWETimerSystem___NewTask(time , YDWETimerSystem___fnDestroyLightning)
+    call SaveLightningHandle(YDHT, YDWETimerSystem___TimerHandle, i, lt)
 endfunction
 //运行触发器
-function YDWETimerSystem__RunTrigger_CallBack takes nothing returns nothing
-    call TriggerExecute(LoadTriggerHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex))
-    call RemoveSavedHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__CurrentIndex)
+function YDWETimerSystem___RunTrigger_CallBack takes nothing returns nothing
+    call TriggerExecute(LoadTriggerHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex))
+    call RemoveSavedHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___CurrentIndex)
 endfunction
 function YDWETimerRunTrigger takes real time,trigger trg returns nothing
-    call SaveTriggerHandle(YDHT, YDWETimerSystem__TimerHandle, YDWETimerSystem__NewTask(time , YDWETimerSystem__fnRunTrigger), trg)
+    call SaveTriggerHandle(YDHT, YDWETimerSystem___TimerHandle, YDWETimerSystem___NewTask(time , YDWETimerSystem___fnRunTrigger), trg)
 endfunction
 //删除漂浮文字
 function YDWETimerDestroyTextTag takes real time,texttag tt returns nothing
@@ -1689,50 +1689,50 @@ function YDWETimerDestroyTextTag takes real time,texttag tt returns nothing
     call SetTextTagFadepoint(tt, time)
 endfunction
 //中心计时器主函数
-function YDWETimerSystem__Main takes nothing returns nothing
- local integer h= YDWETimerSystem__TaskListHead
+function YDWETimerSystem___Main takes nothing returns nothing
+ local integer h= YDWETimerSystem___TaskListHead
  local integer p
 	loop
-		set YDWETimerSystem__CurrentIndex=YDWETimerSystem__TaskListNext[h]
-		exitwhen YDWETimerSystem__CurrentIndex < 0 or YDWETimerSystem__CurrentTime < YDWETimerSystem__TaskListTime[YDWETimerSystem__CurrentIndex]
+		set YDWETimerSystem___CurrentIndex=YDWETimerSystem___TaskListNext[h]
+		exitwhen YDWETimerSystem___CurrentIndex < 0 or YDWETimerSystem___CurrentTime < YDWETimerSystem___TaskListTime[YDWETimerSystem___CurrentIndex]
 		//call BJDebugMsg("Task:"+I2S(CurrentIndex))
-		call TriggerEvaluate(YDWETimerSystem__TaskListProc[YDWETimerSystem__CurrentIndex])
-		call YDWETimerSystem__DeleteTaskIndex(YDWETimerSystem__CurrentIndex)
-		set YDWETimerSystem__TaskListNext[h]=YDWETimerSystem__TaskListNext[YDWETimerSystem__CurrentIndex]
+		call TriggerEvaluate(YDWETimerSystem___TaskListProc[YDWETimerSystem___CurrentIndex])
+		call YDWETimerSystem___DeleteTaskIndex(YDWETimerSystem___CurrentIndex)
+		set YDWETimerSystem___TaskListNext[h]=YDWETimerSystem___TaskListNext[YDWETimerSystem___CurrentIndex]
 	endloop
-	set YDWETimerSystem__CurrentTime=YDWETimerSystem__CurrentTime + 1
+	set YDWETimerSystem___CurrentTime=YDWETimerSystem___CurrentTime + 1
 endfunction
 //初始化函数
-function YDWETimerSystem__Init takes nothing returns nothing
-    set YDWETimerSystem__Timer=CreateTimer()
-	set YDWETimerSystem__TimerHandle=GetHandleId(YDWETimerSystem__Timer)
-	set YDWETimerSystem__CurrentTime=0
-	set YDWETimerSystem__TaskListHead=0
-	set YDWETimerSystem__TaskListNext[0]=- 1
-	set YDWETimerSystem__TaskListIdleHead=1
-	set YDWETimerSystem__TaskListIdleMax=1
-	set YDWETimerSystem__TaskListIdle[1]=- 1
+function YDWETimerSystem___Init takes nothing returns nothing
+    set YDWETimerSystem___Timer=CreateTimer()
+	set YDWETimerSystem___TimerHandle=GetHandleId(YDWETimerSystem___Timer)
+	set YDWETimerSystem___CurrentTime=0
+	set YDWETimerSystem___TaskListHead=0
+	set YDWETimerSystem___TaskListNext[0]=- 1
+	set YDWETimerSystem___TaskListIdleHead=1
+	set YDWETimerSystem___TaskListIdleMax=1
+	set YDWETimerSystem___TaskListIdle[1]=- 1
 	
-	set YDWETimerSystem__fnRemoveUnit=CreateTrigger()
-	set YDWETimerSystem__fnDestroyTimer=CreateTrigger()
-	set YDWETimerSystem__fnRemoveItem=CreateTrigger()
-	set YDWETimerSystem__fnDestroyEffect=CreateTrigger()
-	set YDWETimerSystem__fnDestroyLightning=CreateTrigger()
-	set YDWETimerSystem__fnRunTrigger=CreateTrigger()
-	call TriggerAddCondition(YDWETimerSystem__fnRemoveUnit, Condition(function YDWETimerSystem__RemoveUnit_CallBack))
-	call TriggerAddCondition(YDWETimerSystem__fnDestroyTimer, Condition(function YDWETimerSystem__DestroyTimer_CallBack))
-	call TriggerAddCondition(YDWETimerSystem__fnRemoveItem, Condition(function YDWETimerSystem__RemoveItem_CallBack))
-	call TriggerAddCondition(YDWETimerSystem__fnDestroyEffect, Condition(function YDWETimerSystem__DestroyEffect_CallBack))
-	call TriggerAddCondition(YDWETimerSystem__fnDestroyLightning, Condition(function YDWETimerSystem__DestroyLightning_CallBack))
-	call TriggerAddCondition(YDWETimerSystem__fnRunTrigger, Condition(function YDWETimerSystem__RunTrigger_CallBack))
+	set YDWETimerSystem___fnRemoveUnit=CreateTrigger()
+	set YDWETimerSystem___fnDestroyTimer=CreateTrigger()
+	set YDWETimerSystem___fnRemoveItem=CreateTrigger()
+	set YDWETimerSystem___fnDestroyEffect=CreateTrigger()
+	set YDWETimerSystem___fnDestroyLightning=CreateTrigger()
+	set YDWETimerSystem___fnRunTrigger=CreateTrigger()
+	call TriggerAddCondition(YDWETimerSystem___fnRemoveUnit, Condition(function YDWETimerSystem___RemoveUnit_CallBack))
+	call TriggerAddCondition(YDWETimerSystem___fnDestroyTimer, Condition(function YDWETimerSystem___DestroyTimer_CallBack))
+	call TriggerAddCondition(YDWETimerSystem___fnRemoveItem, Condition(function YDWETimerSystem___RemoveItem_CallBack))
+	call TriggerAddCondition(YDWETimerSystem___fnDestroyEffect, Condition(function YDWETimerSystem___DestroyEffect_CallBack))
+	call TriggerAddCondition(YDWETimerSystem___fnDestroyLightning, Condition(function YDWETimerSystem___DestroyLightning_CallBack))
+	call TriggerAddCondition(YDWETimerSystem___fnRunTrigger, Condition(function YDWETimerSystem___RunTrigger_CallBack))
 	
-    call TimerStart(YDWETimerSystem__Timer, 0.01, true, function YDWETimerSystem__Main)
+    call TimerStart(YDWETimerSystem___Timer, 0.01, true, function YDWETimerSystem___Main)
 endfunction
 //循环类仍用独立计时器
 function YDWETimerSystemGetRunIndex takes nothing returns integer
-    return YDWETimerSystem__TimerSystem_RunIndex
+    return YDWETimerSystem___TimerSystem_RunIndex
 endfunction
-function YDWETimerSystem__RunPeriodicTriggerFunction takes nothing returns nothing
+function YDWETimerSystem___RunPeriodicTriggerFunction takes nothing returns nothing
     local integer tid= GetHandleId(GetExpiredTimer())
     local trigger trg= LoadTriggerHandle(YDHT, tid, $D0001)
 	call SaveInteger(YDHT, StringHash(I2S(GetHandleId(trg))), StringHash("RunIndex"), LoadInteger(YDHT, tid, $D0002))
@@ -1741,7 +1741,7 @@ function YDWETimerSystem__RunPeriodicTriggerFunction takes nothing returns nothi
     endif
     set trg=null
 endfunction
-function YDWETimerSystem__RunPeriodicTriggerFunctionByTimes takes nothing returns nothing
+function YDWETimerSystem___RunPeriodicTriggerFunctionByTimes takes nothing returns nothing
     local integer tid= GetHandleId(GetExpiredTimer())
     local trigger trg= LoadTriggerHandle(YDHT, tid, $D0001)
     local integer times= LoadInteger(YDHT, tid, $D0003)
@@ -1768,9 +1768,9 @@ function YDWETimerRunPeriodicTrigger takes real timeout,trigger trg,boolean b,in
         set t=CreateTimer()
 		set tid=GetHandleId(t)
     endif
-    set YDWETimerSystem__TimerSystem_RunIndex=YDWETimerSystem__TimerSystem_RunIndex + 1
+    set YDWETimerSystem___TimerSystem_RunIndex=YDWETimerSystem___TimerSystem_RunIndex + 1
 	call SaveTriggerHandle(YDHT, tid, $D0001, trg)
-	call SaveInteger(YDHT, tid, $D0002, YDWETimerSystem__TimerSystem_RunIndex)
+	call SaveInteger(YDHT, tid, $D0002, YDWETimerSystem___TimerSystem_RunIndex)
 	set index=LoadInteger(YDHT, GetHandleId(trg), 'YDTS' + data)
     set index=index + 1
 	call SaveInteger(YDHT, GetHandleId(trg), 'YDTS' + data, index)
@@ -1778,9 +1778,9 @@ function YDWETimerRunPeriodicTrigger takes real timeout,trigger trg,boolean b,in
 	
     if b == false then
 		call SaveInteger(YDHT, tid, $D0003, times)
-        call TimerStart(t, timeout, true, function YDWETimerSystem__RunPeriodicTriggerFunctionByTimes)
+        call TimerStart(t, timeout, true, function YDWETimerSystem___RunPeriodicTriggerFunctionByTimes)
       else
-        call TimerStart(t, timeout, true, function YDWETimerSystem__RunPeriodicTriggerFunction)
+        call TimerStart(t, timeout, true, function YDWETimerSystem___RunPeriodicTriggerFunction)
     endif
     set t=null
 endfunction
@@ -1808,7 +1808,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Thu Oct 15 17:39:05 2020
+//   Date: Thu Oct 15 18:43:56 2020
 //   Map Author: 鏈煡
 // 
 //===========================================================================
@@ -1864,10 +1864,16 @@ function CreateBuildingsForPlayer0 takes nothing returns nothing
     local integer unitID
     local trigger t
     local real life
-    set u=CreateUnit(p, 'hctw', - 27680.0, 8992.0, 270.000)
-    set u=CreateUnit(p, 'hhou', - 27776.0, 9600.0, 270.000)
-    set u=CreateUnit(p, 'hctw', - 27744.0, 9248.0, 270.000)
-    set u=CreateUnit(p, 'hctw', - 27744.0, 8736.0, 270.000)
+    set u=CreateUnit(p, 'hctw', - 20704.0, 13408.0, 270.000)
+    set u=CreateUnit(p, 'hctw', - 20512.0, 13408.0, 270.000)
+    set u=CreateUnit(p, 'hctw', - 28384.0, 13344.0, 270.000)
+    set u=CreateUnit(p, 'hctw', - 28192.0, 13344.0, 270.000)
+    set u=CreateUnit(p, 'hctw', - 23072.0, 14240.0, 270.000)
+    set u=CreateUnit(p, 'hctw', - 23840.0, 14240.0, 270.000)
+    set u=CreateUnit(p, 'hctw', - 24032.0, 14240.0, 270.000)
+    set u=CreateUnit(p, 'hctw', - 23968.0, 13088.0, 270.000)
+    set u=CreateUnit(p, 'hctw', - 23776.0, 13088.0, 270.000)
+    set u=CreateUnit(p, 'hctw', - 23008.0, 13088.0, 270.000)
 endfunction
 //===========================================================================
 function CreateUnitsForPlayer0 takes nothing returns nothing
@@ -6516,27 +6522,21 @@ function InitCustomTeams takes nothing returns nothing
     call SetPlayerAllianceStateVisionBJ(Player(11), Player(10), true)
 endfunction
 function InitAllyPriorities takes nothing returns nothing
-    call SetStartLocPrioCount(0, 3)
-    call SetStartLocPrio(0, 0, 2, MAP_LOC_PRIO_LOW)
-    call SetStartLocPrio(0, 1, 3, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrio(0, 2, 5, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrioCount(1, 2)
+    call SetStartLocPrioCount(0, 1)
+    call SetStartLocPrio(0, 0, 2, MAP_LOC_PRIO_HIGH)
+    call SetStartLocPrioCount(1, 1)
     call SetStartLocPrio(1, 0, 3, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrio(1, 1, 4, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrioCount(2, 3)
+    call SetStartLocPrioCount(2, 1)
     call SetStartLocPrio(2, 0, 0, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrio(2, 1, 3, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrio(2, 2, 4, MAP_LOC_PRIO_LOW)
-    call SetStartLocPrioCount(3, 4)
-    call SetStartLocPrio(3, 0, 0, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrio(3, 1, 1, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrio(3, 2, 4, MAP_LOC_PRIO_LOW)
-    call SetStartLocPrio(3, 3, 5, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrioCount(4, 1)
+    call SetStartLocPrioCount(3, 2)
+    call SetStartLocPrio(3, 0, 1, MAP_LOC_PRIO_HIGH)
+    call SetStartLocPrio(3, 1, 5, MAP_LOC_PRIO_HIGH)
+    call SetStartLocPrioCount(4, 3)
     call SetStartLocPrio(4, 0, 1, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrioCount(5, 2)
-    call SetStartLocPrio(5, 0, 0, MAP_LOC_PRIO_HIGH)
-    call SetStartLocPrio(5, 1, 3, MAP_LOC_PRIO_LOW)
+    call SetStartLocPrio(4, 1, 3, MAP_LOC_PRIO_HIGH)
+    call SetStartLocPrio(4, 2, 5, MAP_LOC_PRIO_HIGH)
+    call SetStartLocPrioCount(5, 1)
+    call SetStartLocPrio(5, 0, 3, MAP_LOC_PRIO_HIGH)
 endfunction
 //***************************************************************************
 //*
@@ -6556,9 +6556,9 @@ function main takes nothing returns nothing
     call CreateAllUnits()
     call InitBlizzard()
 
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("YDWETimerSystem__Init")
+call ExecuteFunc("YDWETimerSystem___Init")
 
     call InitGlobals()
     call InitCustomTriggers()
@@ -6574,31 +6574,31 @@ function config takes nothing returns nothing
     call SetPlayers(12)
     call SetTeams(12)
     call SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
-    call DefineStartLocation(0, - 24813.7, 6358.2)
-    call DefineStartLocation(1, - 22848.0, 14720.0)
-    call DefineStartLocation(2, - 29248.0, 8768.0)
-    call DefineStartLocation(3, - 23424.0, 10752.0)
-    call DefineStartLocation(4, - 26112.0, 15296.0)
-    call DefineStartLocation(5, - 21120.0, 6400.0)
-    call DefineStartLocation(6, - 29120.0, 9920.0)
-    call DefineStartLocation(7, - 29184.0, 11904.0)
-    call DefineStartLocation(8, - 23424.0, 11264.0)
-    call DefineStartLocation(9, - 26496.0, 7360.0)
-    call DefineStartLocation(10, - 23680.0, 14720.0)
-    call DefineStartLocation(11, - 21440.0, 8000.0)
+    call DefineStartLocation(0, - 17664.0, 3840.0)
+    call DefineStartLocation(1, - 18048.0, 13504.0)
+    call DefineStartLocation(2, - 17408.0, 5760.0)
+    call DefineStartLocation(3, - 18496.0, 12864.0)
+    call DefineStartLocation(4, - 21312.0, 14080.0)
+    call DefineStartLocation(5, - 18752.0, 12032.0)
+    call DefineStartLocation(6, - 17280.0, 6912.0)
+    call DefineStartLocation(7, - 17344.0, 8896.0)
+    call DefineStartLocation(8, - 18496.0, 13376.0)
+    call DefineStartLocation(9, - 19328.0, 4864.0)
+    call DefineStartLocation(10, - 18880.0, 13504.0)
+    call DefineStartLocation(11, - 19392.0, 13120.0)
     // Player setup
     call InitCustomPlayerSlots()
     call InitCustomTeams()
     call InitAllyPriorities()
 endfunction
+//===========================================================================
+//系统-TimerSystem
+//===========================================================================
 //===========================================================================  
 //===========================================================================  
 //自定义事件 
 //===========================================================================
 //===========================================================================   
-//===========================================================================
-//系统-TimerSystem
-//===========================================================================
 
 
 
