@@ -1,0 +1,135 @@
+
+IncludeFile "UI\FrameDef\Glue\BattleNetTemplates.fdf",
+
+
+Frame "TEXTBUTTON" "BlankButtonTemplate" {
+   Height 0.18,
+    Width 0.09,
+    ControlStyle "AUTOTRACK",
+	ButtonPushedTextOffset -0.01f -0.03f,  
+    //背景
+    ControlBackdrop "HeroButtonBackdropTemplate",
+    Frame "BACKDROP" "HeroButtonBackdropTemplate" {
+    BackdropBackground  "UI\Widgets\EscMenu\Human\blank-background.blp",
+        BackdropBlendAll,
+    }
+	
+    //按下
+    ControlPushedBackdrop "HeroButtonPushedBackdropTemplate",
+    Frame "BACKDROP" "HeroButtonPushedBackdropTemplate" {
+        BackdropBackground  "UI\Widgets\EscMenu\Human\blank-background.blp",
+        BackdropBlendAll,
+    }
+	
+    //禁用
+    ControlDisabledBackdrop "HeroButtonDisabledBackdropTemplate",
+    Frame "BACKDROP" "HeroButtonDisabledBackdropTemplate" {
+        BackdropBackground  "UI\Widgets\EscMenu\Human\blank-background.blp",
+        BackdropBlendAll,
+    }
+}
+
+
+//装备栏按钮
+Frame "BACKDROP" "zbl1" {
+    BackdropBackground "war3mapImported\UI_zblan.blp",//背景图
+    BackdropBlendAll, //Blend，开启透明通道
+	
+	//设置按钮，用于响应鼠标移动事件、点击事件等等，BACKDROP无法响应，但可以设计背景图
+	Frame "GLUETEXTBUTTON" "zblan1" INHERITS WITHCHILDREN "BlankButtonTemplate" {
+		SetAllPoints, //尺寸与锚点全部附加在父控件MallItem上
+	}
+        }
+	
+	//装备栏界面
+Frame "BACKDROP" "zbl2" {
+    BackdropBackground "war3mapImported\UI_zbl.blp",//背景图
+    BackdropBlendAll, //Blend，开启透明通道
+		//背包界面
+		Frame "BACKDROP" "zbl3" {
+    BackdropBackground "war3mapImported\UI_beibao.blp",//背景图
+    BackdropBlendAll, //Blend，开启透明通道
+		}
+	
+	}
+   //物品信息
+Frame "BACKDROP" "wpbj" {
+    BackdropTileBackground, //平铺模式
+    BackdropBackground "war3mapImported\UI_wpbj.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.013,//边界大小
+	BackdropBackgroundInsets 0.004 0.004 0.004 0.004,
+    BackdropEdgeFile "UI\Widgets\ToolTips\Human\human-tooltip-border.blp",
+    BackdropBlendAll, //Blend，开启透明通道
+	
+	//名字
+    Frame "Text" "wpmz" {
+	DecorateFileNames,
+	    FrameFont "MasterFont", 0.012, "",
+		FontJustificationH JUSTIFYCENTER, //居中对齐
+		FontJustificationV JUSTIFYTOP, //未知
+    }
+
+
+	//属性显示
+    Frame "TEXT" "wpsx"{
+        DecorateFileNames,
+	    FrameFont "MasterFont", 0.011, "",
+		FontJustificationH JUSTIFYCENTER, //居中对齐
+		FontJustificationV JUSTIFYTOP, //未知
+        //TextLineHeight 0.05,
+	
+    }
+	
+}
+//贩卖
+    Frame "Text" "fmwb"{
+        DecorateFileNames,
+	    FrameFont "MasterFont", 0.013, "",
+		FontJustificationH JUSTIFYCENTER, //居中对齐
+		FontJustificationV JUSTIFYMIDDLE, //未知
+    }
+	
+	//属性栏文本
+    Frame "Text" "sxlwb" {
+	DecorateFileNames,
+	    FrameFont "MasterFont", 0.0111, "",
+		FontJustificationH JUSTIFYCENTER, //居中对齐
+		FontJustificationV JUSTIFYTOP, //未知
+		 
+		//属性栏文本
+    Frame "Text" "sxlwb2" {
+	DecorateFileNames,
+	    FrameFont "MasterFont", 0.0111, "",
+		FontJustificationH JUSTIFYLEFT, //居中对齐
+		FontJustificationV JUSTIFYTOP, //未知
+    }
+	//属性栏文本
+    Frame "Text" "sxlwb3" {
+	DecorateFileNames,
+	    FrameFont "MasterFont", 0.0111, "",
+		FontJustificationH JUSTIFYLEFT, //居中对齐
+		FontJustificationV JUSTIFYTOP, //未知
+    }
+		//属性栏文本
+    Frame "Text" "sxlwb4" {
+	DecorateFileNames,
+	    FrameFont "MasterFont", 0.010, "",
+		FontJustificationH JUSTIFYLEFT, //居中对齐
+		FontJustificationV JUSTIFYTOP, //未知
+    }
+	//属性栏文本
+    Frame "Text" "sxlwb5" {
+	DecorateFileNames,
+	    FrameFont "MasterFont", 0.010, "",
+		FontJustificationH JUSTIFYLEFT, //居中对齐
+		FontJustificationV JUSTIFYTOP, //未知
+    }
+	//属性栏文本
+    Frame "Text" "sxlwb6" {
+	DecorateFileNames,
+	    FrameFont "MasterFont", 0.011, "",
+		FontJustificationH JUSTIFYLEFT, //居中对齐
+		FontJustificationV JUSTIFYTOP, //未知
+    }
+	}
